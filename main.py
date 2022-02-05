@@ -1,12 +1,14 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options as EdgeOptions
-import myconfig
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import http.client
 import mimetypes
 from codecs import encode
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+import myconfig
 
+
+# markdown换行，不知道有无更优雅的实现
 huanhang = '''
 
 --- 
@@ -15,7 +17,7 @@ huanhang = '''
 '''
 
 
-
+# 通过webdriver获取内容，包装为函数
 def mywebdriverget(driver,website,xpath):
     isOK = True
     driver.get(website)
@@ -27,41 +29,8 @@ def mywebdriverget(driver,website,xpath):
         returnval = isOK
         isOK = False
     return returnval,isOK
-def myPusha(a,b,driver,website,tittle,content):
-    content = myconfig.pushURL+myconfig.sendkey+".send?title="+tittle+"&desp="+content
-    # driver.get(content)
-    driver.request('POST', content)
-    driver.implicitly_wait(10)
-def myPush(website,tittle,content):
 
-    conn = http.client.HTTPSConnection("sctapi.ftqq.com")
-    dataList = []
-    boundary = 'wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
-    dataList.append(encode('--' + boundary))
-    dataList.append(encode('Content-Disposition: form-data; name=title;'))
-
-    dataList.append(encode('Content-Type: {}'.format('text/plain')))
-    dataList.append(encode(''))
-
-    dataList.append(encode("网站内容变更"+website[8:23]))
-    dataList.append(encode('--' + boundary))
-    dataList.append(encode('Content-Disposition: form-data; name=desp;'))
-
-    dataList.append(encode('Content-Type: {}'.format('text/plain')))
-    dataList.append(encode(''))
-
-    dataList.append(encode("您监听的网站："+website+huanhang+"内容变更为："+content))
-    dataList.append(encode('--'+boundary+'--'))
-    dataList.append(encode(''))
-    body = b'\r\n'.join(dataList)
-    payload = body
-    headers = {
-    'Content-type': 'multipart/form-data; boundary={}'.format(boundary) 
-    }
-    conn.request("POST", "/SCT117948TUYjOU1lngouS7OsRSg1otScG.send", payload, headers)
-    res = conn.getresponse()
-    # data = res.read()
-    # print(data.decode("utf-8"))
+# 推送消息方法，内部参数全为字符串类型
 def myPush(website,tittle,contentnew,contentold = ''):
 
     conn = http.client.HTTPSConnection("sctapi.ftqq.com")
@@ -96,8 +65,9 @@ def myPush(website,tittle,contentnew,contentold = ''):
     # print(data.decode("utf-8"))
 
 
-# options = EdgeOptions()
+# 自动注册安装webdriver
 driver = webdriver.Edge(EdgeChromiumDriverManager(log_level=20).install())
+# 进行爬取，获取配置文件内全部网站的内容
 for i in range(len(myconfig.website)):
     returnval,isOK = mywebdriverget(driver,myconfig.website[i],myconfig.websiteXpath[i])
     print(returnval," and ",isOK)
