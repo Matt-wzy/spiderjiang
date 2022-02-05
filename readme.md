@@ -30,3 +30,10 @@ server酱的key获取方式见其[官网](https://sct.ftqq.com/sendkey)
 
 xpath的获取方式：待更新
 
+## 特别鸣谢
+
+Matt-wzy ： 本库创建者
+
+Hacker-Andy： 代码贡献大师
+
+****： ****
