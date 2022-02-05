@@ -24,7 +24,7 @@ python main.py
 
 ------
 
-不好意思开了个玩笑，实际上你需要先配置server酱以及需要爬取的网站网址以及xpath才能使用本代码，方法其实不难：通过文本编辑器比如notepad++打开config.py，然后按照注释编辑里面的内容就可以了。
+不好意思开了个玩笑，实际上你需要先配置server酱以及需要爬取的网站网址以及xpath才能使用本代码，方法其实不难：通过文本编辑器比如notepad++打开myconfig.py，然后按照注释编辑里面的内容就可以了。
 
 server酱的key获取方式见其[官网](https://sct.ftqq.com/sendkey)
 
