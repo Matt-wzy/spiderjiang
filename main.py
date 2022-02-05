@@ -70,7 +70,8 @@ def myPush(website, tittle, content_new, content_old=''):
     headers = {
         'Content-type': 'multipart/form-data; boundary={}'.format(boundary)
     }
-    conn.request("POST", "/SCT117948TUYjOU1lngouS7OsRSg1otScG.send", payload, headers)
+    URL1 = "/"+myconfig.sendkey+".send"
+    conn.request("POST", URL1, payload, headers)
     res = conn.getresponse()
 
 
