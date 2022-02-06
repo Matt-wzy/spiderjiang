@@ -4,3 +4,11 @@
 
 # ignore ALL files in ANY directory named temp
 temp/
+<<<<<<< HEAD
+=======
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+>>>>>>> f941bd0 (简单处理低级问题)
