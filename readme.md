@@ -2,6 +2,8 @@
 
 一个~~假~~爬虫的python实现，并使用server酱做消息推送。
 
+爬虫酱的[官网](https://matt-wzy.github.io/spiderjiang/)
+
 ## 这个分支是什么？
 
 使用github pages发布的有关本软件的使用说明等相关内容的网页源码。
