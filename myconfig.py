@@ -12,6 +12,6 @@ websiteXpath = [
 ]
 
 #server酱的sendkey，需要去官网获取
-sendkey = "你的server酱 key"
+sendkey = "SCT118145TsuYhm9aGlvSSJ0dGxLFQQFOr"
 #server酱的推送地址，默认不改
 pushURL = "https://sctapi.ftqq.com/"
