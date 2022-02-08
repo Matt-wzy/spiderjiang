@@ -1,11 +1,9 @@
-
-# ignore ALL .log files
-*.log
-
-# ignore ALL files in ANY directory named temp
-temp/
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+_site
+.DS_Store
+.jekyll
+.jekyll-metadata
+.jekyll-cache
+.bundle
+.sass-cache
+node_modules
+package.json
