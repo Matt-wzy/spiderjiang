@@ -2,7 +2,7 @@ import time
 import myconfig
 import http.client
 import sqlite3
-import mimetypes
+import schedule
 
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options as EdgeOptions
@@ -13,26 +13,6 @@ from codecs import encode
 huanhang = '''
     --- 
 '''
-
-def getWebDriver(driver, website, xpath):
-    """
-    通过webdriver获取内容，包装为函数
-    :param driver:      浏览器驱动
-    :param website:     目标网址
-    :param xpath:       目标区域路径
-    :return:            返回目标值以及状态（return_val, is_OK）
-    """
-
-    is_OK = True
-    driver.get(website)
-    driver.implicitly_wait(10)
-    try:
-        get_value = driver.find_element_by_xpath(xpath)
-        return_val = get_value.text
-    except:
-        return_val = is_OK
-        isOK = False
-    return return_val, is_OK
 
 def myPush(website, tittle, content_new, content_old=''):
     """
@@ -75,7 +55,35 @@ def myPush(website, tittle, content_new, content_old=''):
     conn.request("POST", URL1, payload, headers)
     res = conn.getresponse()
 
+def getWebDriver(driver, website, xpath):
+    """
+    通过webdriver获取内容，包装为函数
+    :param driver:      浏览器驱动
+    :param website:     目标网址
+    :param xpath:       目标区域路径
+    :return:            返回目标值以及状态（return_val, is_OK）
+    """
+
+    is_OK = True
+    driver.get(website)
+    driver.implicitly_wait(10)
+    try:
+        get_value = driver.find_element_by_xpath(xpath)
+        return_val = get_value.text
+    except:
+        return_val = is_OK
+        isOK = False
+    return return_val, is_OK
+
 def cmpHistory(con, website, content):
+    """
+    通过传入新获取的网站和内容与数据库中的内容进行对比。
+    如果在相同的网站下，内容发生改变，则会更新数据。如果是新网站则会插入这条数据。
+    :param con:         数据库
+    :param website:     需对比网址
+    :param content:     需对比内容
+    :return:            NULL
+    """
     cur = con.cursor()  # 获取游标
     cursor = cur.execute("select id, content, website from messsage")  # 查询当前的所有数据
     new_website = False     # 当为新网址时，值为TRUE
@@ -101,6 +109,11 @@ def cmpHistory(con, website, content):
 
 
 def webCrawler(con):
+    """
+    爬虫的调用函数，通过传入的数据库，与配置的网页信息
+    :param con:     数据库
+    :return:        NULL
+    """
     init_flag = False
     cur = con.cursor()  # 获取游标
 
@@ -128,23 +141,25 @@ def webCrawler(con):
                 con.commit()
                 insert_id = insert_id + 1
             else:               # 此时数据库已存在数据，需要进行存入检查、更新、消息推送
-                cmpHistory(con, myconfig.website[1], return_val)
+                cmpHistory(con, myconfig.website[i], return_val)
 
     driver.quit()
 
-    # cursor = cur.execute("select id, content, website from messsage")  # 查询当前的所有数据
-    # print("\n查询数据库")
-    # for row in cursor:
-    #     print("id = ", row[0])
-    #     print("titl = ", row[1])
-    #     print("web = ", row[2],"\n")
-    #
-    # print("查询完毕")
-    # con.close()
+    cur = con.cursor()  # 获取游标
+    cursor = cur.execute("select id, content, website from messsage")  # 查询当前的所有数据
+    print("\n查询数据库")
+    for row in cursor:
+        print("ID = ", row[0])
+        print("监听网站 = ", row[2])
+        print("当前内容 = ", row[1], "\n")
+    print("查询完毕")
 
-# # if __name__ == '__main__':
-#
-#     # 参数初始化
-#     sqlName = "Test1.db"
-#     con = sqlite3.connect(sqlName)  # 打开或创建数据库
+if __name__ == '__main__':
+    sql_name = "Test.db"            # 数据库名称
+    run_T = 1                        # 运行周期,以小时为单位
+    con = sqlite3.connect(sql_name)  # 打开或创建数据库
 
+    schedule.every(run_T).hour.do(webCrawler,con)
+
+    while True:
+        schedule.run_pending()
