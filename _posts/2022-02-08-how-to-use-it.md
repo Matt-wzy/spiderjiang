@@ -7,8 +7,9 @@ comments: true
 
 ---
 
-
 Hi, there
+
+本代码需要您的电脑里装有edge浏览器才能正常运行，如果您的电脑没有edge浏览器请考虑升级到带有edge的win10。
 
 首先，欢迎使用本开源代码，使用代码前，您需要一定的环境配置才能正常使本源代码发挥其应有作用。
 
@@ -31,4 +32,6 @@ server酱[官网](https://sct.ftqq.com/sendkey)
 ```bash
 python DemoSpider.py
 ```
+
+如果此步骤出现错误提示需要您升级edge浏览器，打开edge浏览器并找到帮助-关于，他会自动检查更新浏览器。
 

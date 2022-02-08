@@ -6,7 +6,7 @@
 name: Spider酱
 
 # Short bio or description (displayed in the header)
-description: 一个开源的、支持自定义监控网站内容变化的爬虫并通知的python程序
+description: 爬取、发现更改并通知
 
 #
 # Flags below are optional
@@ -20,8 +20,8 @@ avatar: https://raw.githubusercontent.com/Matt-wzy/spiderjiang/gh-pages/images/s
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
 # it from the list(Delete '- name: ' and 'url: ', too!)
 navigation:
-  - name: 官网
-    url: /
+  - name: 使用说明
+    url: /how-to-use-it/
   - name: 关于
     url: /about
   - name: Archive
