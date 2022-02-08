@@ -3,10 +3,10 @@
 #
 
 # Name of your site (displayed in the header)
-name: Kiko Now
+name: Spider酱
 
 # Short bio or description (displayed in the header)
-description: Web Developer from Somewhere
+description: 一个开源的、支持自定义监控网站内容变化的爬虫并通知的python程序
 
 #
 # Flags below are optional
