@@ -11,7 +11,9 @@ from codecs import encode
 
 # markdown换行，不知道有无更优雅的实现
 huanhang = '''
-    --- 
+
+--- 
+
 '''
 
 def myPush(website, tittle, content_new, content_old=''):
