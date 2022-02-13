@@ -4,29 +4,12 @@
 
 ## 如何使用？
 
-首先你需要在电脑里安装python3.x，我们调试的时候使用的是3.10
+1. 双击`0init.bat` 并等待其运行完成，给出成功提示
+2. 修改config.py的配置内容，其中website是网址，xpath为浏览器f12开发者模式对应区域的xpath，需要一一对应，pushkey需要去server酱[官网](https://sct.ftqq.com/sendkey)获取
+3. 双击`1run.bat` 
+4. 如果需要开机自动启动，请自行配置实现run.bat的内容
 
-[py官方3.10.2下载地址,windows](https://www.python.org/ftp/python/3.10.2/python-3.10.2-amd64.exe)
 
-然后您需要安装第三方库，安装方法是在存有此代码的目录下运行cmd或者powershell，然后执行
-
-```bash
-pip install -r requirements.txt 
-```
-
-等待全部库都安装完成之后，运行
-
-```bash
-python main.py
-```
-
-~~即可享受代码带来的香气~~
-
-------
-
-不好意思开了个玩笑，实际上你需要先配置server酱以及需要爬取的网站网址以及xpath才能使用本代码，方法其实不难：通过文本编辑器比如notepad++打开myconfig.py，然后按照注释编辑里面的内容就可以了。
-
-server酱的key获取方式见其[官网](https://sct.ftqq.com/sendkey)
 
 xpath的获取方式：待更新
 
